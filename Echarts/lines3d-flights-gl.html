@@ -1,0 +1,133 @@
+<!--
+	THIS EXAMPLE WAS DOWNLOADED FROM https://echarts.apache.org/examples/zh/editor.html?c=lines3d-flights-gl&gl=1&code=G4QwTgBArgDgNgexAEwKbICIgC4gKoBKAMhALwQEDylAKgPoAKAgjQBIQDUEA5APTI4QAWgDmcXiADOk1Nn6DeAMzgBLEQAtskgHQArSQgB23ANwAoALYBPAMLrw2bZPUIA7kSTIVhkQAoAlOYAJNoisgBSAMqUAHK-sIgo6Fi4hEQANBCKUIYAxtgqRhC-Arj-EADeZhAQ1nYO2uoqaB4o3n6B1Vk5-YWGEGHYTCpgMAhg2DYI48i-zQAe5VU1NWCyUGD9ANqlINogI2MTklsLALpbAMxnmbv7h-Nap8jzFwAsZ2fmNQC-XaCQMAIKDYVCSMgQO5AkFg7QWEAwXzZPIFIq-A5gVSGVBLLqrdabCBbQbDUaPKYzdEjLGoLYARjO_kyJIeEwpYFmGJpWwATIyvl0fp0anV7BMnLJKDBUYZfMsVgVsHBUAAuSp4iCg-bYNXcQBYCYBD-UA1sqAfDNAHnagDfTQCLboBpW0A3z6Afb8ADqGQC0coBnRUAiuaAX7VAG3aZsAMVmAEu1uOkNVrsJFsFZlSr5SsskZIyoAF6qy4ABjDCZquQQiDAKu4AGJFGXQxqaookwB1VBqTRFwzjeFwCs5xOGbAAMRAFhUcCsRZkYBUilDvF43AAsipckCDIpsBAAJogVj17iViB_BM_bMrMIIS4YNXxlbwmC61zjODIds55xtHy6tYgVSSAq5B8JyQD1Bdmq2BgFAqAHgmAHACMRgWABOo8MWlxIT-Kxvh-X7TjgqCju-Z7bqswIaNi0hqhm2gABzgTmsG4HAxGSKR277tuYyfgAomWqD5HhHY1ABIAAEaxpqIGoExVE1CI0KGMgDBwCA2I8bxzhuGqijvjI4nbqoGjweeCbwt4Sm8RA3igoYf7RmqdISTm74wPYaqZvhO62TUfYCSocHGbxZkAZZQ4QBmLm7jmzEdlBqCuFMXZAnAPkJl4n4KbkqoQAA7FmLn2Y5EDkQAnG5EAwAp07AjIABCILYEYurKkuKEJkCuCgmVUCVdVtU8KOulbh24U5iooIWFGMZpfpKx5gWurFhmc19WFtlrCIfQbg28FkQArBqA01COXkMUS24TTU0YwGl3A0pIJ6NZN0wct4WGRFYn6oBYupHjdRWoJx3HqiZe0uK4QGiUVp1gAccA1s02DqNZYMiZDUogLkQ2BVtCPAZDRAASIsOkdoPII3mFm4F2kTnegarbSZu05kJAHIGVaB1et2G3TUNKjcJJ0rK4MNw0FhMIwgJWo1ZQsZjTvF04lghqtCoKSExGpnIKwoQPzMluPsyDIGxwBwUQKivdiYC-NwADWqBWMgbjGJkyK9GiuIGbYYqOElJXYLk6hMM7soTWdF1XSeNAICIYioBxihcdgt37WCACSMmoPMjF7hrQrmNnQA
+	请注意，该图表不是 Apache ECharts 官方示例，而是由用户代码生成的。请注意鉴别其内容。
+-->
+<!DOCTYPE html>
+<html lang="zh-CN" style="height: 100%">
+<head>
+  <meta charset="utf-8">
+</head>
+<body style="height: 100%; margin: 0">
+  <div id="container" style="height: 100%"></div>
+
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/jquery"></script>
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.3.3/dist/echarts.min.js"></script>
+  <!-- Uncomment this line if you want to dataTool extension
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.3.3/dist/extension/dataTool.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to use gl extension
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts-gl@2/dist/echarts-gl.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to echarts-stat extension
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts-stat@latest/dist/ecStat.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to use map
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@4.9.0/map/js/china.js"></script>
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@4.9.0/map/js/world.js"></script>
+  -->
+  <!-- Uncomment these two lines if you want to use bmap extension
+  <script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=YOUR_API_KEY"></script>
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.3.3/dist/extension/bmap.min.js"></script>
+  -->
+
+  <script type="text/javascript">
+    var dom = document.getElementById('container');
+    var myChart = echarts.init(dom, null, {
+      renderer: 'canvas',
+      useDirtyRect: false
+    });
+    var app = {};
+    var ROOT_PATH = 'https://echarts.apache.org/examples';
+    var option;
+
+    var uploadedDataURL = ROOT_PATH + '/data-gl/asset/data/flights.json';
+myChart.showLoading();
+$.getJSON(uploadedDataURL, function (data) {
+  myChart.hideLoading();
+  function getAirportCoord(idx) {
+    return [data.airports[idx][3], data.airports[idx][4]];
+  }
+  var routes = data.routes.map(function (airline) {
+    return [getAirportCoord(airline[1]), getAirportCoord(airline[2])];
+  });
+  myChart.setOption({
+    title: {
+    text: '通信卫星实时监测系统\n中关村国家实验室',
+    textStyle:{
+      fontSize:30,
+      color:'#fff',
+      fontWeight:'normal',
+      fontFamily:'serif',//'Microsoft YaHei'
+      }
+    },
+    geo3D: {
+      map: 'world',
+      shading: 'realistic',
+      silent: true,
+      environment: '#333',
+      realisticMaterial: {
+        roughness: 0.8,
+        metalness: 0
+      },
+      postEffect: {
+        enable: true
+      },
+      groundPlane: {
+        show: false
+      },
+      light: {
+        main: {
+          intensity: 1,
+          alpha: 30
+        },
+        ambient: {
+          intensity: 0
+        }
+      },
+      viewControl: {
+        distance: 70,
+        alpha: 89,
+        panMouseButton: 'left',
+        rotateMouseButton: 'right'
+      },
+      itemStyle: {
+        color: '#000'
+      },
+      regionHeight: 0.5
+    },
+    series: [
+      {
+        type: 'lines3D',
+        coordinateSystem: 'geo3D',
+        effect: {
+          show: true,
+          trailWidth: 1,
+          trailOpacity: 0.5,
+          trailLength: 0.2,
+          constantSpeed: 5
+        },
+        blendMode: 'lighter',
+        lineStyle: {
+          width: 0.2,
+          opacity: 0.05
+        },
+        data: routes
+      }
+    ]
+  });
+  window.addEventListener('keydown', function () {
+    myChart.dispatchAction({
+      type: 'lines3DToggleEffect',
+      seriesIndex: 0
+    });
+  });
+});
+
+    if (option && typeof option === 'object') {
+      myChart.setOption(option);
+    }
+
+    window.addEventListener('resize', myChart.resize);
+  </script>
+</body>
+</html>

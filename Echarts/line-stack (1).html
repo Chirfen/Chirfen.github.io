@@ -1,0 +1,119 @@
+<!--
+	THIS EXAMPLE WAS DOWNLOADED FROM https://echarts.apache.org/examples/zh/editor.html?c=line-stack&code=PYBwLglsB2AEC8sDeAoWtJgDYFMBcya6GOAHmAQOSBYCYIfyg1sqD4ZoHnagb6aCLboNK2g3z6D7fgDrRAtHKBnRUCK5oF-1QG3azQDFZgEu1KAGiLowZMAGUwAT1x5UxYgDMYWiAC98AZgAMKo-gDGwLMABOeSgGJjf5aomZgDqOBAA5gAWFJTQHgC2AIZYAY6wptBgAGKJ8RBYOl4AzjjuEMbKAPSVlACyEE7uwEXAxmCwAJqJABJhlIHoAL6Bgw4YwK6QIASGxGBl4eGlVImkEEX9Q2O4S9AAJjOBe4lgiQQA2pQAokn5yrCUAKrQUHAAgnsbSg8AahB7OGAsA-XweABEIO4cE4wPdKJocIl3E5IrArtBwhBoDhKABdIijIjhMoHQhGXBtKjWACkqWIC2iVAALLSxugAEbAMBgYDxKmswIuTKJLEAGUS7JwWAI8wArjgCWMea5OaRDkZjIiwLKoerHEVEgA3HBvIoASSSSxmwyMNtghPQpDeayKerUOhA-AeThOOHCHh0dI5wFl-yROgA4olpulkiU2bBjqcLnUYHCACryuGhPYZyKyuFZMpwzQnEuhvGKog6Z3rN0YD1eyiG5JZqvoEplHCu2DnQKzIzQXJNm4ilIJ92eqhYLE4iewIqnJwAayo6a5ySDxCTZ17AEYAEz2WB76wH7572x7i_WJnfACcx4Pdm-B8v-NtCYHxCH8Sbz1eYFPi3ScmxnbEQIXJdVweddTnHAZExOXdzgPI8LwADnPE972vWBnzvfDH2-awX1gax3xGL9EN_Js_gBIEQUg3QpwecC50QxdEhXNcNwQtIdwuPcAFYnzPV8rwvYTCL3YjyLIplKM_fsaOHKgIShGFmMbadZ0grieNgvjIME3sz2PUjsLsPDSMI6w5NIiyjw_YgHWIb90FoqgESRFE0QxPT5xYsDAs46DePgkzkIuLDj3vcTYEfPD4pkg85NPMjT2ckYiHxQYAG4gA
+	请注意，该图表不是 Apache ECharts 官方示例，而是由用户代码生成的。请注意鉴别其内容。
+-->
+<!DOCTYPE html>
+<html lang="zh-CN" style="height: 100%">
+<head>
+  <meta charset="utf-8">
+</head>
+<body style="height: 100%; margin: 0">
+  <div id="container" style="height: 100%"></div>
+
+  
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.3.3/dist/echarts.min.js"></script>
+  <!-- Uncomment this line if you want to dataTool extension
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.3.3/dist/extension/dataTool.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to use gl extension
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts-gl@2/dist/echarts-gl.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to echarts-stat extension
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts-stat@latest/dist/ecStat.min.js"></script>
+  -->
+  <!-- Uncomment this line if you want to use map
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@4.9.0/map/js/china.js"></script>
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@4.9.0/map/js/world.js"></script>
+  -->
+  <!-- Uncomment these two lines if you want to use bmap extension
+  <script type="text/javascript" src="https://api.map.baidu.com/api?v=3.0&ak=YOUR_API_KEY"></script>
+  <script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.3.3/dist/extension/bmap.min.js"></script>
+  -->
+
+  <script type="text/javascript">
+    var dom = document.getElementById('container');
+    var myChart = echarts.init(dom, null, {
+      renderer: 'canvas',
+      useDirtyRect: false
+    });
+    var app = {};
+    
+    var option;
+
+    option = {
+  title: {
+    text: '通信卫星实时监测系统\n中关村国家实验室',
+    textStyle:{
+      fontSize:30,
+      color:'#fff',
+      fontWeight:'normal',
+      fontFamily:'serif',//'Microsoft YaHei'
+      }
+    },
+  tooltip: {
+    trigger: 'axis'
+  },
+  legend: {
+    data: ['Email', 'Union Ads', 'Video Ads', 'Direct', 'Search Engine']
+  },
+  grid: {
+    left: '3%',
+    right: '4%',
+    bottom: '3%',
+    containLabel: true
+  },
+  toolbox: {
+    feature: {
+      saveAsImage: {}
+    }
+  },
+  xAxis: {
+    type: 'category',
+    boundaryGap: false,
+    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+  },
+  yAxis: {
+    type: 'value'
+  },
+  series: [
+    {
+      name: 'Email',
+      type: 'line',
+      stack: 'Total',
+      data: [120, 132, 101, 134, 90, 230, 210]
+    },
+    {
+      name: 'Union Ads',
+      type: 'line',
+      stack: 'Total',
+      data: [220, 182, 191, 234, 290, 330, 310]
+    },
+    {
+      name: 'Video Ads',
+      type: 'line',
+      stack: 'Total',
+      data: [150, 232, 201, 154, 190, 330, 410]
+    },
+    {
+      name: 'Direct',
+      type: 'line',
+      stack: 'Total',
+      data: [320, 332, 301, 334, 390, 330, 320]
+    },
+    {
+      name: 'Search Engine',
+      type: 'line',
+      stack: 'Total',
+      data: [820, 932, 901, 934, 1290, 1330, 1320]
+    }
+  ]
+};
+
+    if (option && typeof option === 'object') {
+      myChart.setOption(option);
+    }
+
+    window.addEventListener('resize', myChart.resize);
+  </script>
+</body>
+</html>
